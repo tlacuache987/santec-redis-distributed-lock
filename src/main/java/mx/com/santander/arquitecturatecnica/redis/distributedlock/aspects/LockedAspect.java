@@ -19,10 +19,9 @@ public class LockedAspect {
 
 	private Lock simpleRedisLock;
 
-	private List<String> lockKeys = Arrays.asList("distributedLock");
+	//private List<String> lockKeys = Arrays.asList("distributedLock");
 
 	public LockedAspect(Lock simpleRedisLock) {
-		System.out.println("build");
 		this.simpleRedisLock = simpleRedisLock;
 	}
 
@@ -36,12 +35,14 @@ public class LockedAspect {
 		String token = null;
 
 		boolean keepTryingAcquireLock = false;
+		
+		List<String> lockKeys = Arrays.asList(redisLocked.keys());
 
 		try {
 
 			Locked.Type type = redisLocked.lockedType();
 
-			keepTryingAcquireLock = Locked.Type.KEEP_TRYING.equals(type) ? true : false;
+			keepTryingAcquireLock = Locked.Type.KEEP_TRYING.equals(type) ? true : false;	
 
 			token = acquireLock(keepTryingAcquireLock, lockKeys, redisLocked.storeId(), redisLocked.expiration());
 

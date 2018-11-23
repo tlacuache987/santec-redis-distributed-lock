@@ -19,7 +19,7 @@ public @interface RedisLocked {
 	String storeId() default "locks";
 
 	@AliasFor(annotation = Locked.class)
-	String[] keys() default { "distributedLockForAnnotation" };
+	String[] keys() default { "distributedLockFor" };
 
 	@AliasFor(annotation = Locked.class)
 	long expiration() default 5000L;

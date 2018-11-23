@@ -22,7 +22,7 @@ public @interface Locked {
 	/**
 	 * Keys to lock.
 	 */
-	String[] keys() default { "distributedLockForAnnotation" };
+	String[] keys() default { "distributedLockFor" };
 
 	/**
 	 * Lock expiration in milliseconds.
